@@ -215,7 +215,65 @@ html.Div([
 
 
         ],className='row flex display'),
+#########################################################
+     html.Div([
+        html.Div([
+            html.H6(children='CSR Spend over time',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children='-Decrease in 2020 observed due to a change in accounting standards, combined with a reduction in ARUN Spending.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            dcc.Graph(
 
+                        id='graph-1',
+                        figure=fig1)
+
+            ],className='card_container thirteen columns')
+
+    ], className='row flex display'),
+
+############################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Direct Beneficiaries over time',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children='-Should ideally be linear.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children='-Drop in 2019 due to discontinuation of the Bhoomika helpline.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children="-Drop in 2020 due to Covid19's impact on education, causing a loss of 4500 beneficiaries.",
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            dcc.Graph(
+
+                id='graph-2',
+                figure=fig2)
+
+        ], className='card_container thirteen columns')
+
+    ], className='row flex display'),
+
+ 
 ########################################################################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
 
