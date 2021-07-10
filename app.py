@@ -93,6 +93,33 @@ fig3.update_layout(
 
 )
 ###################################################
+###################################################
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
+import numpy as np
+AgeRatio=(r'assets/Age Ratio.xlsx')
+df2= pd.read_excel(AgeRatio)
+fig4 = px.bar(df2, x='Year', y='Beneficiaries',color="Age", barmode="group")
+
+colors3 = {'Under Ten':'#FF0000',
+          'Ten to Twenty':'#FFA500',
+          'Above Twenty':'#90EE90'
+         }
+fig4=go.Figure()
+for k in df2['Age'].unique():
+    df2p = df2[df2['Age']==k]
+    fig4.add_traces(go.Bar(x=df2p['Year'], y = df2p['Beneficiaries'], name=k,
+                         marker_color=colors3[k]))
+fig4.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+fig4.update_layout(
+    xaxis_title="Age",
+    yaxis_title="Beneficiaries",
+
+)
 
 ########### Initiate the app
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -301,9 +328,51 @@ html.Div([
         ], className='card_container thirteen columns')
 
     ], className='row flex display'),
-
- 
+    
 ########################################################################
+     html.Div([
+        html.Div([
+            html.H6(children='Gender Ratio of Direct Beneficiaries',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children='-Gradual shift to more female beneficiaries',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            dcc.Graph(
+
+                id='graph-3',
+                figure=fig3)
+
+        ], className='card_container six columns'),
+        ####################################################
+html.Div([
+            html.H6(children='Age Distribution of Direct Beneficiaries',
+                    style={'textAlign': 'center',
+                            'color': 'orange',
+                            'font-family': 'Helvetica',
+                            'font-size': '40px'}),
+
+            html.H4(children='-A high focus on education leading to a large number of beneficiaries who are below the age of twenty.',
+                     style={'textAlign': 'center',
+                     'color': 'black',
+                     'font-family': 'Helvetica',
+                     'font-size': '30 px'}),
+
+                    dcc.Graph(
+
+                    id='graph-4',
+                    figure=fig4)
+
+            ], className='card_container six columns')
+
+    ], className='row flex display'),
+
+###################################################################################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
 
 if __name__ == '__main__':
