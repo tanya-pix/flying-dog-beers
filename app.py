@@ -15,9 +15,52 @@ import plotly.graph_objs as go
 import pandas as pd
 import dash_interactive_graphviz
 ##########################################################
+from graphviz import Digraph
+import pydot
+
+####
+dot_source = """
+digraph {
+ graph [bgcolor="#DCDCDC"]
+ node [style=filled, fillcolor="#C4A484"] 
+"MIDAS In 2020" -> "Pune"
+"MIDAS In 2020"-> "Hyderabad"
+"MIDAS In 2020" -> "PraDigi App"
+"PraDigi App"-> "400 Videos in Telegu"->"100 Digital Devices Provided per location"
+"Pune"-> "7762 Students"
+"7762 Students"-> "STAR Programme"
+"STAR Programme"-> "210 Students receiving career guidance per location"
+"7762 Students"-> "Community Learning Hubs"
+"Community Learning Hubs"-> "2500 Students reached per location"
+"7762 Students"-> "30 Schools"
+"30 Schools"-> "12 Model Schools"
+"30 Schools"-> "Classrooms Painted in 12"-> "Washrooms Built in 6"-> "Solar Panels Installed in 4"-> "Computer Labs built in 10"-> "Library Provided in 10"->  "Thematic Paintings in 6"-> "Outdoor Play Equipment installed in 12"-> "Sports Kits provided in 12"-> "Water Purifiers installed in 5"-> "Science Labs constructed in 3"-> "Automatic Sanitizer Units Installed in 32"
+"Hyderabad"-> "12705 Students"
+"12705 Students"-> "STAR Programme"
+"12705 Students"-> "Community Learning Hubs"
+"12705 Students"-> "33 Schools"
+"33 Schools"-> "22 Model Schools"
+"33 Schools"-> "Classrooms Painted in 21"->"Washrooms built in 5"-> "Solar Panels Installed in 7"-> "Tables and Chairs bought for 2"-> "Computer Labs built in 11"-> "Science Labs constructed in 7"-> "Library Provided in 26"-> "Thematic Paintings in 19"-> "Outdoor Play Equipment Installed in 12"-> "Sports Kits provided in 18"->"Water Purifiers installed in 7"-> "Automatic Sanitizer Units Installed in 33"
+"PraDigi App" [style=filled, fillcolor="orange"]
+"400 Videos in Telegu"[style=filled, fillcolor="orange"]
+"12 Model Schools"[style=filled, fillcolor="#32CD32"]
+"30 Schools"[style=filled, fillcolor="#FF0000"]
+"22 Model Schools"[style=filled, fillcolor="#32CD32"]
+"33 Schools"[style=filled, fillcolor="#FF0000"]
+"MIDAS In 2020"[style=filled, fillcolor="orange"]
+"STAR Programme"[style=filled, fillcolor="orange"]
+"Community Learning Hubs"[style=filled, fillcolor="orange"]
+"100 Digital Devices Provided per location"[style=filled, fillcolor="orange"]
+"2500 Students reached per location"[style=filled, fillcolor="orange"]
+"210 Students receiving career guidance per location"[style=filled, fillcolor="orange"]
+"Pune"[style=filled, fillcolor="#ffdf00"]
+"Hyderabad"[style=filled, fillcolor="#4169e1"]
+"7762 Students"[style=filled, fillcolor="#ffdf00"]
+"12705 Students"[style=filled, fillcolor="#4169e1"]
+}
+"""
 
 
-###########################################################
 
 ########################################################
 ## Amount spent on CSR per year
@@ -790,6 +833,24 @@ html.Div([
         ], className='row flex display'),
 
 ###################################################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Programme Overview for 2020',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+
+            dash_interactive_graphviz.DashInteractiveGraphviz(
+                id="graph-16",
+                dot_source=dot_source,
+                style={'height': '1000px',
+                       'width': '1200px'})
+
+        ], className='card_container thirteen columns')
+
+    ], className='row flex display'),
+###################################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
 
 if __name__ == '__main__':
