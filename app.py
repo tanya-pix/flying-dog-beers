@@ -14,8 +14,8 @@ tabtitle='CSR Scorecard'
 myheading='Flying Dog Beers'
 label1='IBU'
 label2='ABV'
-#githublink='https://github.com/austinlasseter/flying-dog-beers'
-#sourceurl='https://www.flyingdog.com/beers/'
+githublink='https://github.com/austinlasseter/flying-dog-beers'
+sourceurl='https://www.flyingdog.com/beers/'
 
 ########### Set up the chart
 bitterness = go.Bar(
@@ -42,16 +42,16 @@ beer_fig = go.Figure(data=beer_data, layout=beer_layout)
 
 ########### Initiate the app
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app= dash.Dash(__name__,)
 server = app.server
 app.title=tabtitle
+
 ########### Set up the layout
 app.layout = html.Div(children=[
     html.H1(myheading),
     dcc.Graph(
         id='flyingdog',
-        figure=beer_fig
-    ),
+        figure=beer_fig),
     ]
 )
 
