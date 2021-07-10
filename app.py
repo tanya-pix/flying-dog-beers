@@ -534,6 +534,47 @@ app.layout = html.Div([
                     style={'color': 'black'})
         ], className='one-third column', id='title1')
         ],id='header',className='row flex-display', style ={'margin-bottom': '25px'}),
+   html.Div([
+        html.Div([
+            html.H6(children='Current CSR Projects:',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+
+        ], className='card_container thirteen columns'),
+    ], className='row flex display'),
+##########################################################################
+    html.Div([
+        html.Div([
+            html.H4(
+                children='- MIDAS(Pratham) : Supporting schools with quality education, digital literacy and infrastructural enhancements.',
+                style={'textAlign': 'center',
+                       'color': 'blue',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children='- PSS Trust : Scholarship programme to support the education and employability cause of 62 academically well-performing undergrads from underprivileged backgrounds. ',
+                style={'textAlign': 'center',
+                       'color': 'blue',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children='-Aashray Akruti: Education, counselling, and hearing aid support to 70 hearing impaired children.',
+                style={'textAlign': 'center',
+                       'color': 'blue',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+
+            html.H4(
+                children='- SriVidhyaSchool for Special Children: Educational support for autistic youth.',
+                style={'textAlign': 'center',
+                       'color': 'blue',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+
+        ], className='card_container six columns'),
+
     
    ##########################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
