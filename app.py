@@ -120,7 +120,156 @@ fig4.update_layout(
     yaxis_title="Beneficiaries",
 
 )
+###
 
+#####################################################
+##Employability of Beneficiaries
+Emp= (r"assets/% employed.xlsx")
+df3 = pd.read_excel(Emp,header=0)
+df3.dropna(axis=1, how='any', inplace=True)
+
+fig5 = px.scatter(
+    df3, x='Year', y='Percentage', opacity=0.99,
+    trendline="ols", trendline_color_override='red',
+)
+fig5.update_traces(marker=dict(size=20,color='orange',symbol='star'))
+fig5.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+
+####################################################
+#field of education
+field= (r'assets/IT vs Non IT.xlsx')
+df_field = pd.read_excel(field,header=0,names=['Field','Katalyst India', 'PSS','IandEye','Total'])
+fig6 = px.pie(df_field, values='Total', names='Field',color_discrete_sequence=px.colors.sequential.Purp)
+fig6.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+####################################################
+#self-sufficiency in ARUN beneficiaries
+self_sufficiency= r'assets/Self Sufficiency.xlsx'
+df_self_sufficiency = pd.read_excel(self_sufficiency,sheet_name='Input for Code')
+fig7 = px.bar(df_self_sufficiency, x='Project', y='Percentage Of Beneficiaries',color='Project', color_discrete_sequence=['#000764','#f0250e','#FFA500'])
+fig7.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+    )
+fig7.update_xaxes(visible=False, showticklabels=False)
+####################################################
+# Digital Access
+
+Digital= (r'assets/Digital Empowerment.xlsx')
+df_digital = pd.read_excel(Digital,header=0)
+df_digital.dropna(axis=1, how='any', inplace=True)
+
+fig8 = px.scatter(
+    df_digital, x='Year', y='Beneficiaries', opacity=0.99,
+    trendline="ols", trendline_color_override='orange',
+)
+fig8.update_traces(marker=dict(size=20,color='green',symbol='star-diamond'))
+fig8.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+    )
+####################################################
+##Amount spent per focus Area
+FocusAreas= (r"assets/Focus Areas.xlsx")
+df_focus = pd.read_excel(FocusAreas,sheet_name='Sheet1')
+
+fig9 = px.bar(df_focus, x="Year", y="Amount", color="Focus Area", barmode="group",color_discrete_map=
+        {"Education":'#FF0000',
+          "Women's_Empowerment":'#FFA500',
+          "Citizen Initiatives":'#90EE90'
+         })
+fig9.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+fig9.update_traces(marker_line_width=0)
+fig9.update_yaxes(tickprefix="₹")
+fig9.update_yaxes(tickformat=".f")
+#################################################
+##Beneficiaries per focus area
+
+
+fig10 = px.bar(df_focus, x="Year", y="Beneficiaries", color="Focus Area", barmode="group",color_discrete_map=
+        {"Education":'#FF0000',
+          "Women's_Empowerment":'#ffa500',
+          "Citizen Initiatives":'#90EE90'
+         })
+
+fig10.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+fig10.update_traces(marker_line_width=0)
+
+####################################################
+# Payroll Giving Amount
+
+A = r'assets/Payroll giving - Amount-Scatter.xlsx'
+dfA = pd.read_excel(A)
+
+fig11 = px.line(dfA, x="Year", y="Amount contributed by Associates")
+fig11['data'][0]['line']['color'] = 'orange'
+
+fig11.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+ )
+fig11.update_yaxes(tickprefix="₹")
+fig11.update_yaxes(tickformat=".f")
+###################################################
+#Payroll Giving Number-Hyderabad
+
+B= r"assets/Payroll giving- Number.xlsx"
+dfB = pd.read_excel(B, sheet_name='Hyderabad')
+
+fig12 = px.line(dfB, x="Year", y="Number of Contributors ")
+fig12['data'][0]['line']['color'] = 'orange'
+
+fig12.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+ )
+# Payroll Giving Number-Pune
+dfC = pd.read_excel(B, sheet_name='Pune')
+
+fig13 = px.line(dfC, x="Year", y="Number of Contributors ")
+fig13['data'][0]['line']['color'] = 'orange'
+
+fig13.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+ )
+#################################################
+# MIDAS- Number of Students
+MIDAS= r"assets/MIDAS.xlsx"
+df_Students= pd.read_excel(MIDAS, sheet_name='Students')
+
+fig14 = px.line(df_Students, x="Year", y="Students")
+fig14['data'][0]['line']['color'] = 'blue'
+
+fig14.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+ )
+# MIDAS- Amount Contributed
+
+df_Amount= pd.read_excel(MIDAS, sheet_name='Amount')
+
+fig15 = px.line(df_Amount, x="Year", y="Amount Contributed")
+fig15['data'][0]['line']['color'] = 'blue'
+
+fig15.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+ )
+fig15.update_yaxes(tickprefix="₹")
+fig15.update_yaxes(tickformat=".f")
+##################################################
 ########### Initiate the app
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app= dash.Dash(__name__,)
@@ -371,6 +520,274 @@ html.Div([
             ], className='card_container six columns')
 
     ], className='row flex display'),
+ ########
+       html.Div([
+        html.Div([
+            html.H6(children='Employability of Direct Beneficiaries',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children='-Data from IandEye, Nirmaan and ARUN.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children='-A positive trend observed, from close to 2% of Beneficiaries being placed in 2015 to around 48% in 2020.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children='-Sudden spike in 2016 due to collaboration with Nirmaan, a project in which employability is relatively high.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            dcc.Graph(
+
+                id='graph-5',
+                figure=fig5)
+
+        ], className='card_container six columns'),
+        ####################################################
+html.Div([
+            html.H6(children='Field of education of Beneficiaries',
+                    style={'textAlign': 'center',
+                            'color': 'orange',
+                            'font-family': 'Helvetica',
+                            'font-size': '40px'}),
+
+            html.H4(children='- Data from PSS Trust, Katalyst India and IandEye.',
+                style={'textAlign': 'center',
+               'color': 'black',
+               'font-family': 'Helvetica',
+               'font-size': '30 px'}),
+
+                    dcc.Graph(
+
+                    id='graph-6',
+                    figure=fig6)
+
+            ], className='card_container six columns')
+
+    ], className='row flex display'),
+
+
+###############################################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Self-Sufficiency in ARUN Beneficiaries',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(children='-Measured by the possession of Aadhaar accounts which are necessary to avail government support.',
+                    style={'textAlign': 'center',
+                           'color': 'black',
+                           'font-family': 'Helvetica',
+                           'font-size': '30 px'}),
+            dcc.Graph(
+
+                id='graph-7',
+                figure=fig7)
+
+        ], className='card_container six columns'),
+        ####################################################
+html.Div([
+            html.H6(children='Enabling Digital Access',
+                    style={'textAlign': 'center',
+                            'color': 'orange',
+                            'font-family': 'Helvetica',
+                            'font-size': '40px'}),
+
+            html.H4(children='-‘Leveling out’ of digital access due to Covid19: Only those  digitally connected were able to receive support from ADP.',
+                  style={'textAlign': 'center',
+                   'color': 'black',
+                   'font-family': 'Helvetica',
+                   'font-size': '30 px'}),
+
+                    dcc.Graph(
+
+                    id='graph-8',
+                    figure=fig8)
+
+            ], className='card_container six columns')
+
+    ], className='row flex display'),
+
+
+####################################################################
+
+    html.Div([
+        html.Div([
+            html.H6(children='Progress on Focus Areas',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children="-Three focus areas: Woman's Empowerment, Education, and Citizen Initiatives.",
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            html.H4(
+                children="(Each project falls under only one of the three initiatives)",
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+
+        ], className='card_container thirteen columns'),
+    ], className='row flex display'),
+######################################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Amount Spent per Focus Area',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+
+            dcc.Graph(
+
+                id='graph-9',
+                figure=fig9)
+
+        ], className='card_container six columns'),
+
+html.Div([
+            html.H6(children='Beneficiaries per Focus Area',
+                    style={'textAlign': 'center',
+                            'color': 'orange',
+                            'font-family': 'Helvetica',
+                            'font-size': '40px'}),
+
+                    dcc.Graph(
+
+                    id='graph-10',
+                    figure=fig10)
+
+            ], className='card_container six columns')
+
+    ], className='row flex display'),
+#####################################################################
+
+    html.Div([
+        html.Div([
+            html.H6(children='Payroll Giving',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H4(
+                children='-We urge you to contribute! Payroll Contributions are used to fund IandEye and The SriVidhya School.',
+                style={'textAlign': 'center',
+                       'color': 'black',
+                       'font-family': 'Helvetica',
+                       'font-size': '30 px'}),
+            dcc.Graph(
+
+                id='graph-11',
+                figure=fig11)
+
+        ], className='card_container thirteen columns')
+
+    ], className='row flex display'),
+
+######################################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Contributors from Hyderabad',
+                    style={'textAlign': 'center',
+                           'color': 'green',
+                           'font-family': 'Helvetica',
+                           'font-size': '30px'}),
+
+            dcc.Graph(
+
+                id='graph-12',
+                figure=fig12)
+
+        ], className='card_container six columns'),
+        ####################################################
+html.Div([
+            html.H5(children='Contributors from Pune',
+                    style={'textAlign': 'center',
+                            'color': 'green',
+                            'font-family': 'Helvetica',
+                            'font-size': '30px'}),
+
+                    dcc.Graph(
+
+                    id='graph-13',
+                    figure=fig13)
+
+            ], className='card_container six columns')
+
+        ], className='row flex display'),
+
+##################################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Flagship Programme: MIDAS',
+                    style={'textAlign': 'center',
+                           'color': 'orange',
+                           'font-family': 'Helvetica',
+                           'font-size': '40px'}),
+            html.H5(children='“Many companies can fund our programs and provide monetary help to support our work. But what makes ADP a great partner is their longterm involvement and continued interest in the work we’re doing and the lives we’re trying to improve.” ',
+                    style={'textAlign': 'center',
+                           'color': 'green',
+                           'font-family': 'Helvetica',
+                           'font-size': '25px'}),
+            html.H4(children='-Nandini Dasgupta: lead of Corporate Fundraising, Pratham India ',
+                    style={'textAlign': 'center',
+                           'color': 'blue',
+                           'font-family': 'Helvetica',
+                           'font-size': '20px'}),
+            html.H4(children='Source: Management ReThink : December 2020| Volume 01 Issue 01 ',
+                    style={'textAlign': 'center',
+                           'color': 'blue',
+                           'font-family': 'Helvetica',
+                           'font-size': '15px'}),
+
+        ], className='card_container thirteen columns'),
+    ], className='row flex display'),
+#################################################################
+
+###############################################################
+    html.Div([
+        html.Div([
+            html.H6(children='Students per year',
+                    style={'textAlign': 'center',
+                           'color': 'green',
+                           'font-family': 'Helvetica',
+                           'font-size': '30px'}),
+
+            dcc.Graph(
+
+                id='graph-14',
+                figure=fig14)
+
+        ], className='card_container six columns'),
+        ####################################################
+html.Div([
+            html.H5(children='Amount Contributed per year',
+                    style={'textAlign': 'center',
+                            'color': 'green',
+                            'font-family': 'Helvetica',
+                            'font-size': '30px'}),
+            dcc.Graph(
+
+            id='graph-15',
+            figure=fig15)
+
+            ], className='card_container six columns')
+
+        ], className='row flex display'),
 
 ###################################################################################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
