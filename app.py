@@ -64,6 +64,35 @@ fig2.update_layout(
     plot_bgcolor='#DCDCDC')
 fig2.update_layout(showlegend=False)
 ###################################################
+##Gender Ratio
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
+import numpy as np
+SexRatio=(r'assets/Sex Ratio.xlsx')
+
+df1= pd.read_excel(SexRatio,sheet_name='Input for Code')
+fig3 = px.bar(df1, x='Year', y='Beneficiaries',color="Sex", barmode="group")
+
+colors2 = {'Male':'#006400',
+          'Female':'#FFA500'
+         }
+fig3 =go.Figure()
+for t in df1['Sex'].unique():
+    df1p = df1[df1['Sex']==t]
+    fig3.add_traces(go.Bar(x=df1p['Year'], y = df1p['Beneficiaries'], name=t,
+                         marker_color=colors2[t]))
+fig3.update_layout(
+    paper_bgcolor='#DCDCDC',
+    plot_bgcolor='#DCDCDC'
+)
+fig3.update_layout(barmode='stack')
+fig3.update_layout(
+    xaxis_title="Gender",
+    yaxis_title="Beneficiaries",
+
+)
+###################################################
 
 ########### Initiate the app
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
