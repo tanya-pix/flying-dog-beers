@@ -173,6 +173,48 @@ html.Div([
             ], className='card_container six columns')
 
     ], className='row flex display'),
+#########################################################################
+     html.Div([
+            html.Div([
+                html.H6(children='Coverage of Sustainable Development Goals',
+                        style={'textAlign':'center',
+                               'color':'orange',
+                                'font-family':'Helvetica',
+                                 'font-size': '40px'}),
+
+                html.H4(children='-17 Goals set by the UN General Assembly in 2015, to be achieved by 2030. ADP currently supports 6.',
+                        style={'textAlign':'center',
+                               'color': 'black',
+                               'font-family': 'Helvetica',
+                               'font-size': '30 px'}),
+
+                html.Img(src=app.get_asset_url('SDG1.jpg'),
+                         id='SDGFIG',
+                         style={'height': '500px',
+                                'width': 'auto',
+                                'margin-bottom': '0px'}
+                         ),
+
+                html.Img(src=app.get_asset_url('SDG2.jpg'),
+                         id='SDGFIG2',
+                         style={'height': '500px',
+                                'width': 'auto',
+                                'margin-bottom': '0px'}
+                         ),
+                html.Img(src=app.get_asset_url('SDG3.jpg'),
+                         id='SDGFIG3',
+
+                         style={'height': '500px',
+                                'width': 'auto',
+                                'margin-bottom': '0px',
+                                'margin-left': '400px',
+                                'margin-right':'auto',
+                                }
+                         )
+                ],className='card_container thirteen columns'),
+
+
+        ],className='row flex display'),
 
 ########################################################################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
