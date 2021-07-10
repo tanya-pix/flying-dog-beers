@@ -15,50 +15,7 @@ import plotly.graph_objs as go
 import pandas as pd
 import dash_interactive_graphviz
 ##########################################################
-from graphviz import Digraph
-import pydot
 
-####
-dot_source = """
-digraph {
- graph [bgcolor="#DCDCDC"]
- node [style=filled, fillcolor="#C4A484"] 
-"MIDAS In 2020" -> "Pune"
-"MIDAS In 2020"-> "Hyderabad"
-"MIDAS In 2020" -> "PraDigi App"
-"PraDigi App"-> "400 Videos in Telegu"->"100 Digital Devices Provided per location"
-"Pune"-> "7762 Students"
-"7762 Students"-> "STAR Programme"
-"STAR Programme"-> "210 Students receiving career guidance per location"
-"7762 Students"-> "Community Learning Hubs"
-"Community Learning Hubs"-> "2500 Students reached per location"
-"7762 Students"-> "30 Schools"
-"30 Schools"-> "12 Model Schools"
-"30 Schools"-> "Classrooms Painted in 12"-> "Washrooms Built in 6"-> "Solar Panels Installed in 4"-> "Computer Labs built in 10"-> "Library Provided in 10"->  "Thematic Paintings in 6"-> "Outdoor Play Equipment installed in 12"-> "Sports Kits provided in 12"-> "Water Purifiers installed in 5"-> "Science Labs constructed in 3"-> "Automatic Sanitizer Units Installed in 32"
-"Hyderabad"-> "12705 Students"
-"12705 Students"-> "STAR Programme"
-"12705 Students"-> "Community Learning Hubs"
-"12705 Students"-> "33 Schools"
-"33 Schools"-> "22 Model Schools"
-"33 Schools"-> "Classrooms Painted in 21"->"Washrooms built in 5"-> "Solar Panels Installed in 7"-> "Tables and Chairs bought for 2"-> "Computer Labs built in 11"-> "Science Labs constructed in 7"-> "Library Provided in 26"-> "Thematic Paintings in 19"-> "Outdoor Play Equipment Installed in 12"-> "Sports Kits provided in 18"->"Water Purifiers installed in 7"-> "Automatic Sanitizer Units Installed in 33"
-"PraDigi App" [style=filled, fillcolor="orange"]
-"400 Videos in Telegu"[style=filled, fillcolor="orange"]
-"12 Model Schools"[style=filled, fillcolor="#32CD32"]
-"30 Schools"[style=filled, fillcolor="#FF0000"]
-"22 Model Schools"[style=filled, fillcolor="#32CD32"]
-"33 Schools"[style=filled, fillcolor="#FF0000"]
-"MIDAS In 2020"[style=filled, fillcolor="orange"]
-"STAR Programme"[style=filled, fillcolor="orange"]
-"Community Learning Hubs"[style=filled, fillcolor="orange"]
-"100 Digital Devices Provided per location"[style=filled, fillcolor="orange"]
-"2500 Students reached per location"[style=filled, fillcolor="orange"]
-"210 Students receiving career guidance per location"[style=filled, fillcolor="orange"]
-"Pune"[style=filled, fillcolor="#ffdf00"]
-"Hyderabad"[style=filled, fillcolor="#4169e1"]
-"7762 Students"[style=filled, fillcolor="#ffdf00"]
-"12705 Students"[style=filled, fillcolor="#4169e1"]
-}
-"""
 
 ###########################################################
 # SDG COVERAGE OVER TIME
@@ -76,7 +33,7 @@ colors = ['#FF0000','#FFA500','#90EE90','#006400','#FF00FF','#4169e1','#add8e6',
 
 sns.set_palette(sns.color_palette(colors))
 
-SDG=(r'C:\Users\Admin\Desktop\Final Templates for Code\SDG Coverage.xlsx')
+SDG=app.get_asset_url('SDG Coverage.xlsx')
 df = pd.read_excel(SDG,header=0,names=["Cluster", "Bar", "Bar_part", "Count"])
 df = df.groupby(["Cluster", "Bar", "Bar_part"])["Count"].sum().unstack(fill_value=0)
 
@@ -140,7 +97,6 @@ colors = ['#FF0000','#FFA500','#90EE90','#006400','#FF00FF','#4169e1','#add8e6',
 
 sns.set_palette(sns.color_palette(colors))
 
-SDG=(r'C:\Users\Admin\Desktop\Final Templates for Code\SDG Coverage.xlsx')
 df = pd.read_excel(SDG,header=0,names=["Cluster", "Bar", "Bar_part", "Count"])
 df = df.groupby(["Cluster", "Bar", "Bar_part"])["Count"].sum().unstack(fill_value=0)
 
@@ -205,7 +161,6 @@ colors = ['#FF0000','#FFA500','#90EE90','#006400','#FF00FF','#4169e1','#add8e6',
 
 sns.set_palette(sns.color_palette(colors))
 
-SDG=(r'C:\Users\Admin\Desktop\Final Templates for Code\SDG Coverage.xlsx')
 df = pd.read_excel(SDG,header=0,names=["Cluster", "Bar", "Bar_part", "Count"])
 df = df.groupby(["Cluster", "Bar", "Bar_part"])["Count"].sum().unstack(fill_value=0)
 
@@ -305,7 +260,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import numpy as np
-SexRatio=(r'C:\Users\Admin\Desktop\Final Templates for Code\Sex Ratio.xlsx')
+SexRatio=app.get_asset_url('Sex Ratio.xlsx')
 df1= pd.read_excel(SexRatio,sheet_name='Input for Code')
 fig3 = px.bar(df1, x='Year', y='Beneficiaries',color="Sex", barmode="group")
 
@@ -333,7 +288,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import numpy as np
-AgeRatio=(r'C:\Users\Admin\Desktop\Final Templates for Code\Age Ratio.xlsx')
+AgeRatio=app.get_asset_url('Age Ratio.xlsx')
 df2= pd.read_excel(AgeRatio)
 fig4 = px.bar(df2, x='Year', y='Beneficiaries',color="Age", barmode="group")
 
@@ -358,7 +313,7 @@ fig4.update_layout(
 
 #####################################################
 ##Employability of Beneficiaries
-Emp= (r"C:\Users\Admin\Desktop\Final Templates for Code\% employed.xlsx")
+Emp= app.get_asset_url('% employed.xlsx')
 df3 = pd.read_excel(Emp,header=0)
 df3.dropna(axis=1, how='any', inplace=True)
 
@@ -374,7 +329,7 @@ fig5.update_layout(
 
 ####################################################
 #field of education
-field= (r'C:\Users\Admin\Desktop\Final Templates for Code\IT vs Non IT.xlsx')
+field= app.get_asset_url('IT vs Non IT.xlsx')
 df_field = pd.read_excel(field,header=0,names=['Field','Katalyst India', 'PSS','IandEye','Total'])
 fig6 = px.pie(df_field, values='Total', names='Field',color_discrete_sequence=px.colors.sequential.Purp)
 fig6.update_layout(
@@ -383,7 +338,7 @@ fig6.update_layout(
 )
 ####################################################
 #self-sufficiency in ARUN beneficiaries
-self_sufficiency= r'C:\Users\Admin\Desktop\Final Templates for Code\Self Sufficiency.xlsx'
+self_sufficiency= app.get_asset_url('Self Sufficiency.xlsx')
 df_self_sufficiency = pd.read_excel(self_sufficiency,sheet_name='Input for Code')
 fig7 = px.bar(df_self_sufficiency, x='Project', y='Percentage Of Beneficiaries',color='Project', color_discrete_sequence=['#000764','#f0250e','#FFA500'])
 fig7.update_layout(
@@ -394,7 +349,7 @@ fig7.update_xaxes(visible=False, showticklabels=False)
 ####################################################
 # Digital Access
 
-Digital= (r'C:\Users\Admin\Desktop\Final Templates for Code\Digital Empowerment.xlsx')
+Digital= app.get_asset_url('Digital Empowerment.xlsx')
 df_digital = pd.read_excel(Digital,header=0)
 df_digital.dropna(axis=1, how='any', inplace=True)
 
@@ -409,7 +364,7 @@ fig8.update_layout(
     )
 ####################################################
 ##Amount spent per focus Area
-FocusAreas= (r"C:\Users\Admin\Desktop\Final Templates for Code\Focus Areas.xlsx")
+FocusAreas= app.get_asset_url('Focus Areas.xlsx')
 df_focus = pd.read_excel(FocusAreas,sheet_name='Sheet1')
 
 fig9 = px.bar(df_focus, x="Year", y="Amount", color="Focus Area", barmode="group",color_discrete_map=
@@ -425,85 +380,7 @@ fig9.update_traces(marker_line_width=0)
 fig9.update_yaxes(tickprefix="₹")
 fig9.update_yaxes(tickformat=".f")
 #################################################
-##Beneficiaries per focus area
 
-
-fig10 = px.bar(df_focus, x="Year", y="Beneficiaries", color="Focus Area", barmode="group",color_discrete_map=
-        {"Education":'#FF0000',
-          "Women's_Empowerment":'#ffa500',
-          "Citizen Initiatives":'#90EE90'
-         })
-
-fig10.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
-)
-fig10.update_traces(marker_line_width=0)
-
-####################################################
-# Payroll Giving Amount
-
-A = r'C:\Users\Admin\Desktop\Final Templates for Code\Payroll giving - Amount-Scatter.xlsx'
-dfA = pd.read_excel(A)
-
-fig11 = px.line(dfA, x="Year", y="Amount contributed by Associates")
-fig11['data'][0]['line']['color'] = 'orange'
-
-fig11.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
- )
-fig11.update_yaxes(tickprefix="₹")
-fig11.update_yaxes(tickformat=".f")
-###################################################
-#Payroll Giving Number-Hyderabad
-
-B= r"C:\Users\Admin\Desktop\Final Templates for Code\Payroll giving- Number.xlsx"
-dfB = pd.read_excel(B, sheet_name='Hyderabad')
-
-fig12 = px.line(dfB, x="Year", y="Number of Contributors ")
-fig12['data'][0]['line']['color'] = 'orange'
-
-fig12.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
- )
-# Payroll Giving Number-Pune
-dfC = pd.read_excel(B, sheet_name='Pune')
-
-fig13 = px.line(dfC, x="Year", y="Number of Contributors ")
-fig13['data'][0]['line']['color'] = 'orange'
-
-fig13.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
- )
-#################################################
-# MIDAS- Number of Students
-MIDAS= r"C:\Users\Admin\Desktop\Final Templates for Code\MIDAS.xlsx"
-df_Students= pd.read_excel(MIDAS, sheet_name='Students')
-
-fig14 = px.line(df_Students, x="Year", y="Students")
-fig14['data'][0]['line']['color'] = 'blue'
-
-fig14.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
- )
-# MIDAS- Amount Contributed
-
-df_Amount= pd.read_excel(MIDAS, sheet_name='Amount')
-
-fig15 = px.line(df_Amount, x="Year", y="Amount Contributed")
-fig15['data'][0]['line']['color'] = 'blue'
-
-fig15.update_layout(
-    paper_bgcolor='#DCDCDC',
-    plot_bgcolor='#DCDCDC'
- )
-fig15.update_yaxes(tickprefix="₹")
-fig15.update_yaxes(tickformat=".f")
-##################################################
 
 ########### Initiate the app
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -574,7 +451,7 @@ app.layout = html.Div([
                        'font-size': '30 px'}),
 
         ], className='card_container six columns'),
-
+    ], className='row flex display'),
     
    ##########################
     ],id='mainContainer',style={'display':'flex','flex-direction':'column'})
