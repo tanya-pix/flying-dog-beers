@@ -83,15 +83,15 @@ app.layout = html.Div([
         ],className='one-third column'),
         html.Div([
             html.Div([
-                html.H3('ADP India', style={'margin-bottom': '0px', 'color': 'red','font-family':'Playfair','font-size': '100px'}),
-                html.H5('Corporate Social Responsibility Scorecard 2020', style={'margin-bottom': '0px', 'color': 'blue'})
+                html.H3('ADP India', style={'margin-bottom': '0px', 'color': 'red','font-family':'Playfair','font-size': '100px','textAlign': 'center'}),
+                html.H5('Corporate Social Responsibility Scorecard 2020', style={'margin-bottom': '0px', 'color': 'blue','textAlign': 'center'})
             ])
 
         ], className='one-halfc column', id='title'),
 
         html.Div([
             html.H6('Last Updated: 9th July, 2021',
-                    style={'color': 'black'})
+                    style={'color': 'black','textAlign': 'center'})
         ], className='one-third column', id='title1')
         ],id='header',className='row flex-display', style ={'margin-bottom': '25px'}),
 ##########################################################################
