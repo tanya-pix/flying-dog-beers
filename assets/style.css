@@ -1,0 +1,53 @@
+body {
+background-color: #DCDCDC;
+margin: 2%;
+}
+.card_container{
+    border-radius: 5px;
+    background-color: #DCDCDC ;
+    margin: 16px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 2px 2 px 2px #DCDCDC;
+}
+.create_container {
+  border-radius: 5px;
+  background-color: #DCDCDC;
+  margin: 15px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 2px 2px 2px #DCDCDC;
+}
+
+.create_container1 {
+  border-radius: 5px;
+  background-color: #DCDCDC;
+  margin: 10px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 2px 2px 2px #DCDCDC;
+}
+
+#header{
+align-items: center;
+}
+
+.flex-display{
+    display: flex;
+}
+
+#mainContainer{
+    display: flex;
+    flex-direction:column;
+
+}
+#title{
+    text-align: center-left;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
